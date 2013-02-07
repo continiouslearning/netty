@@ -34,7 +34,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
-import static io.netty.channel.DefaultChannelPipeline.*;
+import static io.netty.channel.AbstractChannelPipeline.*;
 
 final class DefaultChannelHandlerContext extends DefaultAttributeMap implements ChannelHandlerContext {
 
@@ -44,7 +44,7 @@ final class DefaultChannelHandlerContext extends DefaultAttributeMap implements 
     volatile DefaultChannelHandlerContext prev;
 
     private final Channel channel;
-    private final DefaultChannelPipeline pipeline;
+    private final AbstractChannelPipeline pipeline;
     private final String name;
     private final Set<ChannelHandlerType> type;
     private final ChannelHandler handler;
@@ -101,14 +101,14 @@ final class DefaultChannelHandlerContext extends DefaultAttributeMap implements 
     volatile boolean removed;
 
     DefaultChannelHandlerContext(
-            DefaultChannelPipeline pipeline, EventExecutorGroup group,
+            AbstractChannelPipeline pipeline, EventExecutorGroup group,
             String name, ChannelHandler handler) {
         this(pipeline, group, name, handler, false);
     }
 
     @SuppressWarnings("unchecked")
     DefaultChannelHandlerContext(
-            DefaultChannelPipeline pipeline, EventExecutorGroup group,
+            AbstractChannelPipeline pipeline, EventExecutorGroup group,
             String name, ChannelHandler handler, boolean needsLazyBufInit) {
 
         if (name == null) {
